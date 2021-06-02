@@ -14,7 +14,6 @@ import (
 
 var sh *shell.Shell
 
-//数据上传到ipfs
 func UploadIPFS(r io.Reader, ipfsUploadServiceHost string) string {
 	sh = shell.NewShell(ipfsUploadServiceHost)
 	hash, err := sh.Add(bufio.NewReader(r))
@@ -26,8 +25,7 @@ func UploadIPFS(r io.Reader, ipfsUploadServiceHost string) string {
 	return hash
 }
 
-//从ipfs下载数据
-func CatIPFS(cid string,ipfsUploadServiceiHost string) ([]byte, error) {
+func CatIPFS(cid string, ipfsUploadServiceiHost string) ([]byte, error) {
 	sh = shell.NewShell(ipfsUploadServiceiHost)
 	read, err := sh.Cat(cid)
 	if err != nil {
@@ -39,7 +37,6 @@ func CatIPFS(cid string,ipfsUploadServiceiHost string) ([]byte, error) {
 	return body, nil
 }
 
-//对象存储
 func UploadMinio(objectName string, filePath string, endPoint string, accesskeyID string, accessKeySecret string, bucket string) bool {
 	fmt.Println("enter UploadMinio")
 	ctx := context.Background()
