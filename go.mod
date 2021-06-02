@@ -1,4 +1,4 @@
-module uploadIPFSorMinio
+module github.com/moonlightcity0917/uploadIPFSorMinio
 
 go 1.15
 
