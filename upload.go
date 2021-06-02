@@ -1,7 +1,6 @@
-package storage
+package upload
 
 import (
-	"FileStore-Server/config"
 	"bufio"
 	"fmt"
 	shell "github.com/ipfs/go-ipfs-api"
@@ -16,8 +15,8 @@ import (
 var sh *shell.Shell
 
 //数据上传到ipfs
-func UploadIPFS(r io.Reader) string {
-	sh = shell.NewShell(config.IpfsUploadServiceHost)
+func UploadIPFS(r io.Reader, ipfsUploadServiceHost string) string {
+	sh = shell.NewShell(ipfsUploadServiceHost)
 	hash, err := sh.Add(bufio.NewReader(r))
 	if err != nil {
 		fmt.Println("upload IPFS fail：", err)
@@ -28,8 +27,8 @@ func UploadIPFS(r io.Reader) string {
 }
 
 //从ipfs下载数据
-func CatIPFS(cid string) ([]byte, error) {
-	sh = shell.NewShell(config.IpfsUploadServiceHost)
+func CatIPFS(cid string,ipfsUploadServiceiHost string) ([]byte, error) {
+	sh = shell.NewShell(ipfsUploadServiceiHost)
 	read, err := sh.Cat(cid)
 	if err != nil {
 		fmt.Println(err)
